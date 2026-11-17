@@ -125,7 +125,6 @@ const daftarRepo = document.querySelector("#daftar-repo");
 const statusRepo = document.querySelector("#status-repo");
 if (daftarRepo) {
     async function ambilRepo() {
-        statusRepo.textContent = "Memuat repositori...";
         try {
             const response = await fetch(alamatRepo + pilihan);
             if (!response.ok) {
@@ -145,7 +144,7 @@ if (daftarRepo) {
             });
             statusRepo.textContent = `${repos.length} repositori yang terakhir diperbarui:`;
         } catch (error) {
-            statusRepo.textContent = "Repositori tidak dapat dimuat. Periksa koneksi atau nama akun GitHub.";
+            statusRepo.textContent =  "Maaf, daftar repository tidak dapat dimuat. Periksa koneksi atau nama akun GitHub.";
             console.error("Gagal memuat repositori GitHub:", error);
         }
     }
