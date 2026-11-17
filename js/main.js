@@ -35,50 +35,7 @@ karakter`;
 
 
 // 4. Daftar proyek dan filter (halaman Proyek)
-const proyek = [
-    {
-        judul: "Halaman Profil Pertama",
-        kategori: "HTML",
-        gambar: "img/profil pertama.png",
-        alt: "Tangkapan layar halaman profil Andi Pratama",
-        deskripsi: "Halaman web pertama saya, dibuat dengan HTML dasar.",
-    },
-    {
-        judul: "Form Kontak",
-        kategori: "HTML",
-        gambar: "img/kontak.png",
-        alt: "Tangkapan layar form kontak berisi lima isian",
-        deskripsi: "Form dengan label dan validasi bawaan browser.",
-    },
-    {
-        judul: "Tabel Jadwal Belajar",
-        kategori: "HTML",
-        gambar: "img/jadwal.png",
-        alt: "Tangkapan layar tabel jadwal belajar mandiri",
-        deskripsi: "Jadwal belajar mingguan dengan thead dan tbody.",
-    },
-    {
-        judul: "Portofolio Responsif",
-        kategori: "CSS",
-        gambar: "img/portofolioproject.png",
-        alt: "Tangkapan layar portofolio di ponsel dan laptop",
-        deskripsi: "Rapi di ponsel, tablet, dan laptop dengan Flexbox.",
-    },
-    {
-        judul: "Kalkulator Nilai Rapor",
-        kategori: "JavaScript",
-        gambar: "img/kalkulator.png",
-        alt: "Tangkapan layar hasil kalkulator nilai di Console",
-        deskripsi: "Rata-rata dan predikat nilai dengan fungsi JavaScript.",
-    },
-    {
-        judul: "Lima Soal Logika",
-        kategori: "JavaScript",
-        gambar: "img/logika.png",
-        alt: "Tangkapan layar hasil uji lima soal logika",
-        deskripsi: "Lima fungsi logika yang masing-masing diuji 3 masukan.",
-    },
-];
+let proyek = [];
 
 const daftarProyek = document.querySelector("#daftar-proyek");
 const jumlahProyek = document.querySelector("#jumlah-proyek");
@@ -99,8 +56,29 @@ function tampilkanProyek(daftar) {
     jumlahProyek.textContent = `Menampilkan ${daftar.length} dari ${proyek.length} proyek`;
 }
 
+// Mengambil data proyek dari file JSON
+async function muatProyek() {
+    jumlahProyek.textContent = "Memuat proyek...";
+
+    try {
+        const response = await fetch("data/proyek.json");
+
+        if (!response.ok) {
+            throw new Error(`Status ${response.status}`);
+        }
+
+        proyek = await response.json();
+        tampilkanProyek(proyek);
+
+    } catch (error) {
+        jumlahProyek.textContent = "Data proyek gagal dimuat.";
+        console.error(error);
+    }
+}
+
 function pasangFilter(idTombol, kategori) {
     const tombol = document.querySelector(idTombol);
+
     tombol.addEventListener("click", () => {
         if (kategori === "Semua") {
             tampilkanProyek(proyek);
@@ -111,7 +89,7 @@ function pasangFilter(idTombol, kategori) {
 }
 
 if (daftarProyek) {
-    tampilkanProyek(proyek);
+    muatProyek();
     pasangFilter("#filter-semua", "Semua");
     pasangFilter("#filter-html", "HTML");
     pasangFilter("#filter-css", "CSS");
