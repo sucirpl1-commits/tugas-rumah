@@ -154,3 +154,6 @@ sedang saya kembangkan.`;
 if (daftarSkill) {
     muatKeahlian();
 }
+if (document.querySelector("#form-skill")) {
+    const formSkill = document.querySelector("#form-skill");
+}
