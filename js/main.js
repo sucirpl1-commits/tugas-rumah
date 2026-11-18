@@ -96,7 +96,7 @@ if (daftarProyek) {
     pasangFilter("#filter-javascript", "JavaScript");
 }
 // 5. Repositori GitHub terbaru (halaman Proyek)
-gitconst username = "suciorpl1-commits";
+const username = "sucirpl1-commits";
 const alamatRepo = `https://api.github.com/users/${username}/repos`;
 const pilihan = "?sort=updated&per_page=6";
 const daftarRepo = document.querySelector("#daftar-repo");
