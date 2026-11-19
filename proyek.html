@@ -4,8 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Suci Setyo putri | Proyek</title>
-  <link rel="icon" href="img/fotoprofil.png">
+  <meta name="description" content="Kumpulan proyek HTML, CSS, dan JavaScript hasil belajar Suci Setyo Putri di Kelas Industri UBIG.">
+  <meta name="theme-color" content="#1D3557">
+  <title>Suci Setyo Putri | Proyek</title>
+  <link rel="icon" href="img/fotoprofil.jpg" type="image/jpeg">
+  <link rel="preload" href="data/proyek.json" as="fetch" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600;700&display=swap"
@@ -15,25 +18,26 @@
 </head>
 
 <body>
+  <a class="lewati-navigasi" href="#konten-utama">Lewati ke konten utama</a>
   <header>
     <div class="container navbar">
       <h1>Suci Setyo Putri</h1>
-      <nav class="menu-laptop">
+      <nav class="menu-laptop" aria-label="Navigasi utama">
         <ul>
           <li><a href="index.html">Beranda</a></li>
-          <li><a href="proyek.html">Proyek</a></li>
+          <li><a href="proyek.html" aria-current="page">Proyek</a></li>
           <li><a href="kontak.html">Kontak</a></li>
           <li><a href="kalkulator.html">Kalkulator</a></li>
         </ul>
       </nav>
-      <button type="button" id="tombol-tema" class="tombol-tema">Mode Gelap</button>
+      <button type="button" id="tombol-tema" class="tombol-tema" aria-label="Aktifkan mode gelap">Mode Gelap</button>
       <!-- Tantangan: menu ponsel yang bisa dibuka-tutup -->
       <details class="menu-ponsel">
         <summary>Menu</summary>
-        <nav>
+        <nav aria-label="Navigasi utama ponsel">
           <ul>
             <li><a href="index.html">Beranda</a></li>
-            <li><a href="proyek.html">Proyek</a></li>
+            <li><a href="proyek.html" aria-current="page">Proyek</a></li>
             <li><a href="kontak.html">Kontak</a></li>
             <li><a href="kalkulator.html">Kalkulator</a></li>
           </ul>
@@ -42,34 +46,33 @@
     </div>
   </header>
 
-  <main>
+  <main id="konten-utama">
     <div class="container">
-      <section>
-        <h2>Proyek Saya</h2>
+      <section aria-labelledby="judul-proyek">
+        <h2 id="judul-proyek">Proyek Saya</h2>
         <p>Kumpulan hasil belajar saya di Kelas Industri UBIG.</p>
 
-        <div class="filter">
+        <div class="filter" aria-label="Filter kategori proyek">
 
-          <button type="button" id="filter-semua" class="tombol-filter">Semua</button>
-          <button type="button" id="filter-html" class="tombol-filter">HTML</button>
-          <button type="button" id="filter-css" class="tombol-filter">CSS</button>
-          <button type="button" id="filter-javascript" class="tombol-filter">JavaScript</button>
+          <button type="button" id="filter-semua" class="tombol-filter" aria-controls="daftar-proyek" aria-pressed="true">Semua</button>
+          <button type="button" id="filter-html" class="tombol-filter" aria-controls="daftar-proyek" aria-pressed="false">HTML</button>
+          <button type="button" id="filter-css" class="tombol-filter" aria-controls="daftar-proyek" aria-pressed="false">CSS</button>
+          <button type="button" id="filter-javascript" class="tombol-filter" aria-controls="daftar-proyek" aria-pressed="false">JavaScript</button>
         </div>
-        <p id="jumlah-proyek"></p>
-        <div class="daftar-kartu" id="daftar-proyek"></div>
+        <p id="jumlah-proyek" aria-live="polite">Memuat proyek...</p>
+        <div class="daftar-kartu" id="daftar-proyek" aria-label="Daftar proyek"></div>
       </section>
 
-      <section class="kartu">
-        <h2>Repositori GitHub Saya</h2>
-        <p>Daftar ini diambil langsung dari GitHub setiap kali halaman
-          dibuka.</p>
-        <p id="status-repo"></p>
+      <section class="kartu" aria-labelledby="judul-repo">
+        <h2 id="judul-repo">Repositori GitHub Saya</h2>
+        <p>Daftar ini diambil langsung dari GitHub setiap kali halaman dibuka.</p>
+        <p id="status-repo" aria-live="polite">Memuat repositori...</p>
         <ul id="daftar-repo"></ul>
       </section>
       
       <!-- FAQ dengan details dan summary -->
-      <section class="kartu">
-        <h2>Pertanyaan yang Sering Diajukan</h2>
+      <section class="kartu" aria-labelledby="judul-faq">
+        <h2 id="judul-faq">Pertanyaan yang Sering Diajukan</h2>
         <details>
           <summary>Bahasa apa yang dipakai untuk membuat proyek ini?</summary>
           <p>Proyek di halaman ini dibuat dengan HTML, CSS, dan JavaScript.
@@ -84,9 +87,9 @@
   </main>
 
   <footer>
-    <p>Kontak: <a href="mailto:suci.rpl1@gmail.com">.suci.rpl1@gmail.com</a> |
-      <a href="https://github.com/" target="_blank">GitHub</a> |
-      <a href="https://www.youtube.com/" target="_blank">YouTube</a>
+    <p>Kontak: <a href="mailto:suci.rpl1@gmail.com">suci.rpl1@gmail.com</a> |
+      <a href="https://github.com/sucirpl1-commits" target="_blank" rel="noopener noreferrer">GitHub</a> |
+      <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">YouTube</a>
     </p>
     <p>&copy; 2026 Suci Setyo Putri. Dibuat di Kelas Industri UBIG.</p>
   </footer>

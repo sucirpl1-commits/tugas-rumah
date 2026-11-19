@@ -5,23 +5,26 @@
 const tombolTema = document.querySelector("#tombol-tema");
 const temaTersimpan = localStorage.getItem("tema");
 
-if (temaTersimpan === "gelap") {
-    document.body.classList.add("gelap");
-    tombolTema.textContent = "Mode Terang";
-}
-
-tombolTema.addEventListener("click", () => {
-    document.body.classList.toggle("gelap");
-    if (document.body.classList.contains("gelap")) {
+if (tombolTema) {
+    if (temaTersimpan === "gelap") {
+        document.body.classList.add("gelap");
         tombolTema.textContent = "Mode Terang";
+        tombolTema.setAttribute("aria-label", "Aktifkan mode terang");
+        tombolTema.setAttribute("aria-pressed", "true");
     } else {
-        tombolTema.textContent = "Mode Gelap";
+        tombolTema.setAttribute("aria-pressed", "false");
     }
 
-    localStorage.setItem("tema",
-        document.body.classList.contains("gelap") ? "gelap" : "terang"
-    );
-});
+    tombolTema.addEventListener("click", () => {
+        document.body.classList.toggle("gelap");
+        const gelapAktif = document.body.classList.contains("gelap");
+        tombolTema.textContent = gelapAktif ? "Mode Terang" : "Mode Gelap";
+        tombolTema.setAttribute("aria-label", gelapAktif ? "Aktifkan mode terang" : "Aktifkan mode gelap");
+        tombolTema.setAttribute("aria-pressed", String(gelapAktif));
+
+        localStorage.setItem("tema", gelapAktif ? "gelap" : "terang");
+    });
+}
 
 // 3. Penghitung karakter pesan (halaman Kontak)
 const kotakPesan = document.querySelector("#pesan");
@@ -40,18 +43,22 @@ let proyek = [];
 const daftarProyek = document.querySelector("#daftar-proyek");
 const jumlahProyek = document.querySelector("#jumlah-proyek");
 
-function buatKartu(item) {
+function buatKartu(item, urutan) {
+    const muat = urutan < 2
+        ? 'fetchpriority="high"'
+        : 'loading="lazy"';
+
     return `
     <article class="kartu">
         <span class="label">${item.kategori}</span>
         <h3>${item.judul}</h3>
-        <img src="${item.gambar}" alt="${item.alt}" width="280">
+        <img src="${item.gambar}" alt="${item.alt}" width="840" height="594" ${muat} decoding="async">
         <p>${item.deskripsi}</p>
     </article>`;
 }
 
 function tampilkanProyek(daftar) {
-    const semuaKartu = daftar.map((item) => buatKartu(item));
+    const semuaKartu = daftar.map((item, i) => buatKartu(item, i));
     daftarProyek.innerHTML = semuaKartu.join("");
     jumlahProyek.textContent = `Menampilkan ${daftar.length} dari ${proyek.length} proyek`;
 }
@@ -80,6 +87,11 @@ function pasangFilter(idTombol, kategori) {
     const tombol = document.querySelector(idTombol);
 
     tombol.addEventListener("click", () => {
+        document.querySelectorAll(".tombol-filter").forEach((item) => {
+            item.setAttribute("aria-pressed", "false");
+        });
+        tombol.setAttribute("aria-pressed", "true");
+
         if (kategori === "Semua") {
             tampilkanProyek(proyek);
         } else {
@@ -154,6 +166,45 @@ sedang saya kembangkan.`;
 if (daftarSkill) {
     muatKeahlian();
 }
-if (document.querySelector("#form-skill")) {
-    const formSkill = document.querySelector("#form-skill");
+// Form keahlian baru
+const formSkill = document.querySelector("#form-skill");
+if (formSkill) {
+    formSkill.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const inputSkill = formSkill.querySelector("#tombol-skill");
+        const inputLevel = formSkill.querySelector("#tombol-level");
+        const namaSkill = inputSkill.value.trim();
+        const levelSkill = inputLevel.value;
+
+        if (!namaSkill || !levelSkill) return;
+
+        const item = document.createElement("li");
+        item.textContent = `${namaSkill} (${levelSkill})`;
+        daftarSkill.appendChild(item);
+
+        const jumlahSaatIni = daftarSkill.querySelectorAll("li").length;
+        jumlahSkill.textContent = `Ada ${jumlahSaatIni} keahlian yang sedang saya kembangkan.`;
+
+        formSkill.reset();
+        inputSkill.focus();
+    });
+}
+
+// Form kontak
+const formKontak = document.querySelector("#form-kontak");
+if (formKontak) {
+    formKontak.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const keperluan = formKontak.querySelector("#keperluan").value;
+        if (!keperluan) {
+            alert("Silakan pilih keperluan terlebih dahulu.");
+            return;
+        }
+
+        alert("Pesan berhasil dikirim. Terima kasih!");
+        formKontak.reset();
+        hitungKarakter.textContent = "0/300 karakter";
+    });
 }

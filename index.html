@@ -46,7 +46,7 @@
   <main>
     <div class="container">
       <section class="hero">
-        <img src="img/fotoprofil.png" alt="Foto profil Suci Setyo Putri" width="180">
+        <img src="img/fotoprofil.jpg" alt="Foto profil Suci Setyo Putri" height="180" width="180">
         <div>
           <h2>Halo, saya Suci!</h2>
           <p>Siswa kelas X SMK, calon Junior Web Developer di Kelas Industri UBIG.</p>
@@ -94,7 +94,12 @@
             <label for="tombol-skill">Keahlian</label>
             <input id="tombol-skill" name="skill" type="text" required>
             <label for="tombol-level">Level</label>
-            <input type="text" id="tombol-level" name="level" required>
+            <select id="tombol-level" name="level" required>
+              <option value="">-- Pilih level --</option>
+              <option value="Dasar">Dasar</option>
+              <option value="Menengah">Menengah</option>
+              <option value="Mahir">Mahir</option>
+            </select>
             <button type="submit">Tambahkan</button>
           </form>
         </section>

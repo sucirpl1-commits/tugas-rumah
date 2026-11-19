@@ -53,7 +53,7 @@ ol {
 }
 
 a {
-  color: #E63946;
+  color: #C62836;
 }
 
 /* 3. Wadah, header, dan menu */
@@ -158,17 +158,19 @@ main {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
+
 .tambah-skill {
-  background-color: #2d3036;
+  background-color: var(--warna-kartu);
   text-align: left;
   text-decoration: none;
-  color: #426f9b;
+  color: var(--warna-teks);
   padding: 1rem;
   margin-bottom: 1.5rem;
-  border: 1px solid #f8f8f9;
+  border: 1px solid var(--warna-garis);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
+
 .daftar-kartu {
   display: flex;
   flex-wrap: wrap;
@@ -182,6 +184,9 @@ main {
 }
 
 article img {
+  display: block;
+  max-width: 100%;
+  height: auto;
   border-radius: 8px;
   border: 1px solid #DDDDDD;
 }
@@ -303,26 +308,28 @@ footer a {
 }
 
 .filter {
-display: flex;
-flex-wrap: wrap;
-gap: 0.5rem;
-margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
 }
+
 .tombol-filter {
-padding: 0.5rem 1rem;
-border: 2px solid var(--warna-garis);
-background-color: var(--warna-kartu);
-color: var(--warna-judul);
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--warna-garis);
+  background-color: var(--warna-kartu);
+  color: var(--warna-judul);
 }
+
 .label {
-display: inline-block;
-padding: 0.1rem 0.6rem;
-margin-bottom: 0.5rem;
-border-radius: 999px;
-background-color: var(--warna-latar);
-color: var(--warna-judul);
-font-size: 0.85rem;
-font-weight: 600;
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
+  margin-bottom: 0.5rem;
+  border-radius: 999px;
+  background-color: var(--warna-latar);
+  color: var(--warna-judul);
+  font-size: 0.85rem;
+  font-weight: 600;
 }
 
 /* 11. Tema gelap: isi variabel diganti saat body memiliki class
@@ -360,7 +367,55 @@ body.gelap footer,
 body.gelap th {
   background-color: #0B1526;
 }
+
 .keterangan {
-font-size: 0.875rem;
+  font-size: 0.875rem;
 }
-.
+
+#jumlah-proyek,
+#status-repo {
+  min-height: 1.5rem;
+}
+
+#daftar-proyek {
+  min-height: 520px;
+}
+
+#daftar-repo {
+  min-height: 10rem;
+}
+@media (max-width: 700px) {
+  #daftar-proyek { min-height: 1100px; }
+}
+
+.lewati-navigasi {
+  position: absolute;
+  left: 1rem;
+  top: -5rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: #FFFFFF;
+  color: #1D3557;
+  border-radius: 6px;
+  font-weight: 700;
+}
+
+.lewati-navigasi:focus {
+  top: 1rem;
+}
+
+:focus-visible {
+  outline: 3px solid #FFBF47;
+  outline-offset: 3px;
+}
+
+button:hover,
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.tombol-filter[aria-pressed="true"] {
+  border-color: #C62836;
+  background-color: #C62836;
+  color: #FFFFFF;
+}
